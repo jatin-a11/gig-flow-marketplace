@@ -32,10 +32,10 @@ app.use("/api/hire", hireRoutes);
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.NODE_ENV === "production" 
-            ? "https://gig-flow-marketplace.vercel.app" 
-            : "http://localhost:5173",
-    methods: ["GET", "POST", "PATCH"],
+    origin:[ "https://gig-flow-marketplace.vercel.app", 
+      "https://gig-flow-marketplace-5vr8w0ifc-jatinarya578-9767s-projects.vercel.app",
+      "http://localhost:5173"],
+    methods: ["GET", "POST", "PATCH","PUT", "DELETE"],
     credentials: true
   }
 });
