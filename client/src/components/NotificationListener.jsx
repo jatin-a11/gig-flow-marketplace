@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { io } from 'socket.io-client';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../contexts/AuthContextgit rm --cached server/.env';
 import { toast, Toaster } from 'react-hot-toast'; // Notification popup ke liye
 
 const socket = io('http://localhost:5008');
