@@ -2,7 +2,6 @@ export const hireFreelancer = async (req, res) => {
   try {
     const { gigId, bidId } = req.body;
 
-    // Security Check: Kya ye gig sach mein is user ki hai?
     const gig = await Gig.findById(gigId);
     if (!gig) return res.status(404).json({ message: "Gig nahi mili!" });
 

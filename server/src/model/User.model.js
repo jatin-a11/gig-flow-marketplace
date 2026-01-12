@@ -16,8 +16,8 @@ const userSchema = new mongoose.Schema({
   },
   role: { 
     type: String, 
-    enum: ['client', 'freelancer'], // Sirf ye do options allow honge
-    default: 'freelancer' // Default role
+    enum: ['client', 'freelancer'],
+    default: 'freelancer' 
   }
 },{timestamps:true})
 

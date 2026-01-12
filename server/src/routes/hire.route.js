@@ -4,7 +4,6 @@ import { protect } from "../middleware/authMiddleware.js";
 
 const router = Router();
 
-// PATCH /api/hire/:BidId
 router.patch("/:BidId", protect, hireFreelancer);
 
 export default router;

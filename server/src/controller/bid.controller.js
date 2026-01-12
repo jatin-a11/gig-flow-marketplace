@@ -5,7 +5,6 @@ export const createBid = async (req, res) => {
     try {
         const { message, price, gigId } = req.body;
 
-        // 1. Pehle check karein ki kya freelancer khud ki gig par toh bid nahi kar raha?
         const gig = await Gig.findById(gigId);
         if (!gig) {
             return res.status(404).json({ message: "Gig nahi mili!" });
@@ -15,7 +14,6 @@ export const createBid = async (req, res) => {
             return res.status(400).json({ message: "Aap apni hi gig par bid nahi kar sakte!" });
         }
 
-        // 2. Bid create karein
         const newBid = new Bid({
             message,
             bidAmount: price,
@@ -26,8 +24,6 @@ export const createBid = async (req, res) => {
 
         const savedBid = await newBid.save();
 
-        // 3. 🔥 SABSE ZAROORI STEP: Gig ke 'bids' array mein is ID ko push karein
-        // Iske bina Client ko dashboard par bids nahi dikhengi
         await Gig.findByIdAndUpdate(gigId, { 
             $push: { bids: savedBid._id } 
         });
@@ -43,7 +39,6 @@ export const createBid = async (req, res) => {
     }
 };
 
-// Freelancer ki apni bids dekhne ke liye
 export const getFreelancerBids = async (req, res) => {
     try {
         const bids = await Bid.find({ freelancerId: req.user.id })

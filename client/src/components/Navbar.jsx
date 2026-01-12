@@ -6,13 +6,11 @@ const Navbar = () => {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
 
-    // Logout handler
     const handleLogout = () => {
         logout();
         navigate('/login');
     };
 
-    // 1. Agar user logged in nahi hai (Public Navbar)
     if (!user) {
         return (
             <nav className="bg-white shadow-md p-4 flex justify-between items-center px-10">
@@ -25,7 +23,6 @@ const Navbar = () => {
         );
     }
 
-    // 2. Agar user logged in hai (Protected Navbar)
     return (
         <nav className="bg-white shadow-md p-4 flex justify-between items-center px-10">
             <Link to="/" className="text-2xl font-bold text-blue-600">GigFlow</Link>
@@ -34,7 +31,6 @@ const Navbar = () => {
                 {/* Sabhi ko dikhne wala link */}
                 <Link to="/" className="hover:text-blue-500 font-medium text-gray-700">Browse Jobs</Link>
                 
-                {/* ---  CLIENT ONLY LINKS --- */}
                 {user.role === 'client' && (
                     <>
                         <Link 
@@ -49,7 +45,6 @@ const Navbar = () => {
                     </>
                 )}
 
-                {/* ---  FREELANCER ONLY LINKS --- */}
                 {user.role === 'freelancer' && (
                     <Link 
                         to="/my-bids" 
@@ -58,8 +53,6 @@ const Navbar = () => {
                         My Applied Bids
                     </Link>
                 )}
-
-                {/* --- USER PROFILE & LOGOUT --- */}
                 <div className="flex items-center gap-4 ml-4 border-l pl-4">
                     <div className="text-right">
                         <p className="text-gray-800 text-sm font-bold leading-tight">

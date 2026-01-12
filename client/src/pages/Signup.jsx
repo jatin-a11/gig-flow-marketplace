@@ -8,7 +8,7 @@ const Signup = () => {
         name: '',
         email: '',
         password: '',
-        role: 'freelancer' // Default role
+        role: 'freelancer' 
     });
     const navigate = useNavigate();
 

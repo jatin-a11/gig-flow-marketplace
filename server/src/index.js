@@ -6,10 +6,10 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import { connectDB } from "./dbConfig/db.js"; 
 
-// Saare Routes Import Karein (Extension .js zaroori hai)
+
 import authRoutes from "./routes/auth.route.js"; 
-import gigRoutes from "./routes/gigs.route.js"; // Naya add karein
-import bidRoutes from "./routes/bid.route.js";   // Naya add karein
+import gigRoutes from "./routes/gigs.route.js"; 
+import bidRoutes from "./routes/bid.route.js";   
 import hireRoutes from "./routes/hire.route.js";
 
 dotenv.config();
@@ -26,8 +26,8 @@ app.use(cookieParser());
 
 // Route Handlers
 app.use("/api/auth", authRoutes); 
-app.use("/api/gigs", gigRoutes); // Ab 404 nahi aayega gigs par
-app.use("/api/bids", bidRoutes); // Ab bids ke liye rasta khul gaya
+app.use("/api/gigs", gigRoutes); 
+app.use("/api/bids", bidRoutes);
 app.use("/api/hire", hireRoutes);
 
 const io = new Server(server, {

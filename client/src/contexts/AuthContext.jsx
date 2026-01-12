@@ -7,12 +7,10 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // Page refresh hone par check karega ki user logged-in hai ya nahi
     useEffect(() => {
         const checkLoggedIn = async () => {
             const token = localStorage.getItem('token');
             
-            // Agar token hi nahi hai, toh direct loading false kar do
             if (!token) {
                 setLoading(false);
                 return;
@@ -20,7 +18,6 @@ export const AuthProvider = ({ children }) => {
 
             try {
                 const { data } = await API.get('/auth/me'); 
-                // Note: Aapke getMe controller ke hisaab se check karein ki data.user hai ya sirf data
                 setUser(data.user || data); 
             } catch (err) {
                 console.error("Refresh auth error:", err);
@@ -33,12 +30,10 @@ export const AuthProvider = ({ children }) => {
         checkLoggedIn();
     }, []);
 
-    // --- LOGIN UPDATE ---
     const login = async (email, password) => {
         try {
             const { data } = await API.post('/auth/login', { email, password });
             
-            // Token ko local storage mein save karein taaki refresh par kaam aaye
             if (data.token) {
                 localStorage.setItem('token', data.token); 
             }
@@ -50,14 +45,12 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    // --- LOGOUT UPDATE ---
     const logout = async () => {
         try {
             await API.post('/auth/logout');
         } catch (err) {
             console.error("Logout error:", err);
         } finally {
-            // Token aur user state clear karein
             localStorage.removeItem('token');
             setUser(null);
         }

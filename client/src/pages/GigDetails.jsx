@@ -25,21 +25,19 @@ const GigDetails = () => {
         fetchGig();
     }, [id]);
 
-    // Bid submit karne ka function
     const handleBidSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Frontend se 'price' bhej rahe hain, jo Backend mein 'bidAmount' ban jayega
+            
             await API.post('/bids', {
-                price: Number(bidData.price), // Number mein convert karna safe hai
+                price: Number(bidData.price),
                 message: bidData.message,
-                gigId: id // Ye URL wala id hai jo backend ko zaroori chahiye
+                gigId: id 
             });
             
             alert("Bid submitted successfully!");
-            navigate('/'); // Success ke baad home par bhej do
+            navigate('/');
         } catch (err) {
-            // Agar error aaye toh console mein check karein
             console.error("Bid submission error:", err.response?.data);
             alert(err.response?.data?.message || "Bid failed. Please check if you are logged in.");
         }
@@ -75,7 +73,6 @@ const GigDetails = () => {
                 </p>
             </div>
 
-            {/* Bid Form Section */}
             <div className="bg-gray-800 p-8 rounded-xl border border-gray-700 shadow-inner">
                 <h3 className="text-2xl font-bold mb-6 text-blue-400 border-b border-gray-700 pb-2">
                     Submit Your Proposal
