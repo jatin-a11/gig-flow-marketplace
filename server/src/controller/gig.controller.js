@@ -1,4 +1,6 @@
 import { Gig } from '../model/Gig.model.js';
+import mongoose from 'mongoose';
+
 
 export const createGig = async (req, res) => {
   try {
